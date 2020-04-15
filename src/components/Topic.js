@@ -3,14 +3,19 @@ import { GlobalContext } from "../context/DashboardStore";
 
 export const TopicFolder = () => {
   //CTX store
-  const { topics } = useContext(GlobalContext);
-  const TopicFolders = Object.keys(topics)
-
-
+  const { topics, deleteTopic, addTopic } = useContext(GlobalContext);
+  const TopicFolders = Object.keys(topics);
+  // console.log(topics);
 
   // local state
   const [activeFolder, changeActiveFolder] = useState(TopicFolders[0]);
   const [textValue, changeTextValue] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addTopic(activeFolder, textValue, topics[activeFolder].length + 1); 
+    changeTextValue("");
+  };
 
   return (
     <>
@@ -29,29 +34,23 @@ export const TopicFolder = () => {
         <ul>
           {topics[activeFolder].map((singleTopic, i) => (
             <li key={i}>
-              Topic: {singleTopic.topic} From: {singleTopic.from}
+              Topic: {singleTopic.topic} From: {singleTopic.from}{" "}
+              <button onClick={() => deleteTopic(activeFolder, singleTopic.id)}>
+                DELETE
+              </button>
             </li>
           ))}
         </ul>
       </div>
       <div className="topic-submit">
-        <input
-          type="text"
-          value={textValue}
-          onChange={(e) => changeTextValue(e.target.value)}
-        />
-        <button
-          onClick={() => {
-            // sendTopicAction({
-            //   from: user,
-            //   topic: textValue,
-            //   topic_folder: activeFolder,
-            // });
-            changeTextValue("");
-          }}
-        >
-          submit
-        </button>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            value={textValue}
+            onChange={(e) => changeTextValue(e.target.value)}
+          />
+          <button>submit</button>
+        </form>
       </div>
     </>
   );

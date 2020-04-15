@@ -23,7 +23,7 @@ import io from "socket.io-client";
 
 const initState = {
   topic_folder1: [
-    { from: "jayjay", topic: "covid19", id: 1 },
+    { from: "jayjay", topic: "covid1919", id: 1 },
     { from: "jean", topic: "dbz", id: 2 },
     { from: "shay", topic: "the moon", id: 3 },
   ],
@@ -43,15 +43,22 @@ export const GlobalProvider = ({ children }) => {
 
   //ACTIONS
 
-  function deleteTopic( topic_folder, id) {
+  const deleteTopic = (topic_folder, id) => {
     dispatch({
-      type: 'DELETE_TOPIC',
-      payload: topic_folder, id
-    })
-  }
+      type: "DELETE_TOPIC",
+      payload: { topic_folder, id },
+    });
+  };
+
+  const addTopic = (topic_folder, topic, id) => {
+    dispatch({
+      type: "ADD_TOPIC",
+      payload: { topic_folder, topic, id },
+    });
+  };
 
   return (
-    <GlobalContext.Provider value={{ topics: state }}>
+    <GlobalContext.Provider value={{ topics: state, deleteTopic, addTopic }}>
       {children}
     </GlobalContext.Provider>
   );
