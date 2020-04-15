@@ -1,7 +1,7 @@
 import React from "react";
 import { Dashboard } from "./components/Dashboard";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import { GlobalProvider } from "./context/DashboardStore";
+import { GlobalProvider } from "./context/GlobalStore";
 import "./App.css";
 
 function App() {

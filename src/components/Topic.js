@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { GlobalContext } from "../context/DashboardStore";
+import { GlobalContext } from "../context/GlobalStore";
 
 export const TopicFolder = () => {
   //CTX store

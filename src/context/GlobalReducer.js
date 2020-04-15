@@ -1,6 +1,6 @@
 export default (state, action) => {
   const { topic_folder, id } = action.payload;
-  console.log(action.payload)
+  
   switch (action.type) {
     case "DELETE_TOPIC":
       return {

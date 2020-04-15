@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import DashboardReducer from "./DashboardReducer";
+import DashboardReducer from "./GlobalReducer";
 import io from "socket.io-client";
 
 /*
