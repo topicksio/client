@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from "react";
-import DashboardReducer from "./GlobalReducer";
+import GlobalReducer from "./GlobalReducer";
 import io from "socket.io-client";
+import { stringify } from "querystring";
 
 /*
   topic:
@@ -22,16 +23,7 @@ import io from "socket.io-client";
 */
 
 const initState = {
-  topic_folder1: [
-    { from: "jayjay", topic: "covid1919", id: 1 },
-    { from: "jean", topic: "dbz", id: 2 },
-    { from: "shay", topic: "the moon", id: 3 },
-  ],
-  topic_folder2: [
-    { from: "jack", topic: "of all", id: 1 },
-    { from: "nolienol", topic: "idk man", id: 2 },
-    { from: "paul", topic: "hardware", id: 3 },
-  ],
+  
 };
 
 // Create context
@@ -39,7 +31,7 @@ export const GlobalContext = createContext(initState);
 
 // Provider component
 export const GlobalProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(DashboardReducer, initState);
+  const [state, dispatch] = useReducer(GlobalReducer, initState);
 
   //ACTIONS
 
@@ -57,8 +49,15 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
+  const addFolder = (topic_folder) => {
+    dispatch({
+      type: "ADD_FOLDER",
+      payload: { topic_folder },
+    });
+  };
+
   return (
-    <GlobalContext.Provider value={{ topics: state, deleteTopic, addTopic }}>
+    <GlobalContext.Provider value={{ state, deleteTopic, addTopic, addFolder }}>
       {children}
     </GlobalContext.Provider>
   );

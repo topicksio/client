@@ -3,18 +3,25 @@ import { GlobalContext } from "../context/GlobalStore";
 
 export const TopicFolder = () => {
   //CTX store
-  const { topics, deleteTopic, addTopic } = useContext(GlobalContext);
-  const TopicFolders = Object.keys(topics);
-  // console.log(topics);
+  const { state, deleteTopic, addTopic, addFolder } = useContext(GlobalContext);
+  const TopicFolders = Object.keys(state);
+  // console.log(state);
 
   // local state
-  const [activeFolder, changeActiveFolder] = useState(TopicFolders[0]);
+  const [activeFolder, changeActiveFolder] = useState(TopicFolders[0] || "");
   const [textValue, changeTextValue] = useState("");
+  const [folderTextValue, changeFolderTextValue] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addTopic(activeFolder, textValue, topics[activeFolder].length + 1); 
+    addTopic(activeFolder, textValue, state[activeFolder].length + 1);
     changeTextValue("");
+  };
+
+  const onSubmitFolder = (e) => {
+    e.preventDefault();
+    addFolder(folderTextValue);
+    changeFolderTextValue("");
   };
 
   return (
@@ -28,13 +35,21 @@ export const TopicFolder = () => {
             </li>
           ))}
         </ul>
+        <form onSubmit={onSubmitFolder}>
+          <input
+            type="text"
+            value={folderTextValue}
+            onChange={(e) => changeFolderTextValue(e.target.value)}
+          />
+          <button type="submit">Submit</button>
+        </form>
       </div>
       <div className="topic-folder-content">
         {activeFolder}
         <ul>
-          {topics[activeFolder].map((singleTopic, i) => (
+          {(state[activeFolder] || []).map((singleTopic, i) => (
             <li key={i}>
-              Topic: {singleTopic.topic} From: {singleTopic.from}{" "}
+              Topic: {singleTopic.topic} From: {singleTopic.from}
               <button onClick={() => deleteTopic(activeFolder, singleTopic.id)}>
                 DELETE
               </button>
