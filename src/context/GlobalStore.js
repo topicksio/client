@@ -1,30 +1,8 @@
 import React, { createContext, useReducer } from "react";
 import GlobalReducer from "./GlobalReducer";
-import io from "socket.io-client";
-import { stringify } from "querystring";
 
-/*
-  topic:
-  {
-    from: 'username',
-    topic: 'topichere',
-    topic_folder: 'foler name'
-  }
 
-  Dashboard State: 
-  {
-    topic-folder1:[
-      {topic},{topic},{topic}
-    ]
-    topic-folder2:[
-      {topic},{topic},{topic}
-    ]
-  }
-*/
-
-const initState = {
-  
-};
+const initState = {};
 
 // Create context
 export const GlobalContext = createContext(initState);
