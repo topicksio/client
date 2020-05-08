@@ -1,5 +1,22 @@
 import React, { useState, useContext } from "react";
 import { GlobalContext } from "../context/GlobalStore";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+const USERS_QUERY = gql`
+  query {
+    users {
+      id
+      userId
+      topics {
+        id
+        from
+        topic
+        likes
+      }
+    }
+  }
+`;
 
 export const TopicFolder = () => {
   //CTX store
@@ -24,33 +41,25 @@ export const TopicFolder = () => {
     changeFolderTextValue("");
   };
 
+  const { loading, error, data } = useQuery(USERS_QUERY);
+
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+
   return (
     <>
       <div className="topic-folder-container">
         <h1 className="title">Dashboard</h1>
-        <ul>
-          {TopicFolders.map((topicF, i) => (
-            <li onClick={(e) => changeActiveFolder(e.target.innerText)} key={i}>
-              {topicF}
-            </li>
-          ))}
-        </ul>
-        <form onSubmit={onSubmitFolder}>
-          <input
-            type="text"
-            value={folderTextValue}
-            onChange={(e) => changeFolderTextValue(e.target.value)}
-          />
-          <button type="submit">Submit</button>
-        </form>
+        {console.log(data.users[0].topics)}
       </div>
       <div className="topic-folder-content">
-        {activeFolder}
         <ul>
-          {(state[activeFolder] || []).map((singleTopic, i) => (
+          {data.users[0].topics.map((topic, i) => (
+            
             <li key={i}>
-              Topic: {singleTopic.topic} From: {singleTopic.from}
-              <button onClick={() => deleteTopic(activeFolder, singleTopic.id)}>
+              
+              Topic: {topic.topic} From: {topic.from}
+              <button onClick={() => deleteTopic(activeFolder, topic.id)}>
                 DELETE
               </button>
             </li>
@@ -70,3 +79,16 @@ export const TopicFolder = () => {
     </>
   );
 };
+
+
+// {activeFolder}
+//         <ul>
+//           {(state[activeFolder] || []).map((singleTopic, i) => (
+//             <li key={i}>
+//               Topic: {singleTopic.topic} From: {singleTopic.from}
+//               <button onClick={() => deleteTopic(activeFolder, singleTopic.id)}>
+//                 DELETE
+//               </button>
+//             </li>
+//           ))}
+//         </ul>
