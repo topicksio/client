@@ -30,7 +30,7 @@ export const SingleTopic = () => {
   if (error) return `Error! ${error.message}`;
 
   return (
-    <div className="topic-folder-content">
+    <div className="topic-container">
       <ul>
         {data.users[0].topics.map((topic, i) => (
           <li key={i}>
