@@ -9,7 +9,7 @@ export const AddTopic = () => {
     GlobalContext
   );
   const TopicFolders = Object.keys(state);
-  // console.log(state);
+
 
   // local state
   const [activeFolder, changeActiveFolder] = useState(TopicFolders[0] || "");
