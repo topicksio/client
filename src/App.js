@@ -1,13 +1,22 @@
 import React from "react";
-import ApolloClient from "apollo-boost";
+import {ApolloClient} from "apollo-client";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { Dashboard } from "./components/Dashboard";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import { GlobalProvider } from "./context/GlobalStore";
+import { WebSocketLink } from "apollo-link-ws";
+import {InMemoryCache} from 'apollo-cache-inmemory'
 import "./App.css";
 
 const client = new ApolloClient({
-  uri: "http://localhost:5000",
+  cache: new InMemoryCache(),
+  link: new WebSocketLink({
+    uri: `wss://topickshasura.herokuapp.com/v1/graphql`,
+    options: {
+      reconnect: true,
+      connectionParams: {},
+    },
+  }),
 });
 
 function App() {
