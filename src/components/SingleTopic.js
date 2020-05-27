@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { useSubscription } from "@apollo/react-hooks";
 import { Button, Card, Icon, Label, Loader } from "semantic-ui-react";
 import { AddTopic } from "./AddTopic";
+import { Likes } from "./Likes";
 
 const TOPICS_SUBSCRIPTION = gql`
   subscription topicsSubscription {
@@ -15,6 +16,7 @@ const TOPICS_SUBSCRIPTION = gql`
     }
   }
 `;
+
 
 export const SingleTopic = (props) => {
   //CTX store
@@ -30,28 +32,13 @@ export const SingleTopic = (props) => {
     <>
       <Card.Group>
         {data.topics.map((topic, i) => (
-          <Card>
+          <Card key={topic.id}>
             <Card.Content>
-              {/* <Image
-                floated="right"
-                size="mini"
-                src={require("../assets/4.png")}
-              /> */}
               <Card.Header>{topic.from}</Card.Header>
               <Card.Description>
                 <strong>{topic.topic}</strong>
               </Card.Description>
-              <Button as="div" labelPosition="right" floated="right">
-                <Button color="blue" basic size="mini">
-                  <Icon name="heart" />
-                  Like
-                </Button>
-                <Label as="a" basic color="blue" pointing="left">
-                  {topic.likes}
-                </Label>
-              </Button>
-
-              {/* <button onClick={() => deleteTopic()}>DELETE</button> */}
+              <Likes topic={topic} />
             </Card.Content>
           </Card>
         ))}
