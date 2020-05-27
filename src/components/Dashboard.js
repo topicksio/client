@@ -8,9 +8,9 @@ import { AddTopic } from "./AddTopic";
 export const Dashboard = () => {
   return (
     <div className="dashboard-container">
-      <h1 className="title">Dashboard</h1>
+      <h1 className="dashboard-info">Dashboard</h1>
       <SingleTopic />
-      <AddTopic />
+      
     </div>
   );
 };

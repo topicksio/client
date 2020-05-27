@@ -24,7 +24,7 @@ function App() {
     <ApolloProvider client={client}>
       <GlobalProvider>
         <Router>
-          <Route exact path="/">
+          <Route exact path="/dashboard">
             <Dashboard />
           </Route>
         </Router>

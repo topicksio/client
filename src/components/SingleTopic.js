@@ -1,40 +1,9 @@
 import React, { useState, useContext } from "react";
 import { GlobalContext } from "../context/GlobalStore";
 import gql from "graphql-tag";
-import { useQuery, useSubscription } from "@apollo/react-hooks";
-
-import { split } from "apollo-link";
-import { HttpLink } from "apollo-link-http";
-
-import { getMainDefinition } from "apollo-utilities";
-
-// // Create an http link:
-// const httpLink = new HttpLink({
-//   uri: "http://localhost:3000/graphql",
-// });
-
-// // Create a WebSocket link:
-// const wsLink = new WebSocketLink({
-//   uri: `ws://topickshasura.herokuapp.com/v1/graphql`,
-//   options: {
-//     reconnect: true,
-//   },
-// });
-
-// // using the ability to split links, you can send data to each link
-// // depending on what kind of operation is being sent
-// const link = split(
-//   // split based on operation type
-//   ({ query }) => {
-//     const definition = getMainDefinition(query);
-//     return (
-//       definition.kind === "OperationDefinition" &&
-//       definition.operation === "subscription"
-//     );
-//   },
-//   wsLink,
-//   httpLink
-// );
+import { useSubscription } from "@apollo/react-hooks";
+import { Button, Card, Icon, Label, Loader } from "semantic-ui-react";
+import { AddTopic } from "./AddTopic";
 
 const TOPICS_SUBSCRIPTION = gql`
   subscription topicsSubscription {
@@ -53,21 +22,41 @@ export const SingleTopic = (props) => {
   const TopicFolders = Object.keys(state);
 
   const { loading, error, data } = useSubscription(TOPICS_SUBSCRIPTION);
-  
-  if (loading) return "Loading...";
+
+  if (loading) return <Loader active inline="centered" />;
   if (error) return `Error! ${error.message}`;
 
   return (
-    <div className="topic-container">
-      <ul>
-        
+    <>
+      <Card.Group>
         {data.topics.map((topic, i) => (
-          <li key={i}>
-            Topic: {topic.topic} From: {topic.from} Likes: {topic.likes}
-            <button onClick={() => deleteTopic()}>DELETE</button>
-          </li>
+          <Card>
+            <Card.Content>
+              {/* <Image
+                floated="right"
+                size="mini"
+                src={require("../assets/4.png")}
+              /> */}
+              <Card.Header>{topic.from}</Card.Header>
+              <Card.Description>
+                <strong>{topic.topic}</strong>
+              </Card.Description>
+              <Button as="div" labelPosition="right" floated="right">
+                <Button color="blue" basic size="mini">
+                  <Icon name="heart" />
+                  Like
+                </Button>
+                <Label as="a" basic color="blue" pointing="left">
+                  {topic.likes}
+                </Label>
+              </Button>
+
+              {/* <button onClick={() => deleteTopic()}>DELETE</button> */}
+            </Card.Content>
+          </Card>
         ))}
-      </ul>
-    </div>
+      </Card.Group>
+      <AddTopic />
+    </>
   );
 };
