@@ -11,7 +11,7 @@ const ADD_LIKES = gql`
         id
         topic
         likes
-        from
+        user_id
       }
     }
   }
