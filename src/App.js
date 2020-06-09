@@ -21,7 +21,8 @@ const client = new ApolloClient({
       connectionParams: {
         headers: {
           // Authorization: `Bearer ${token}`,
-          "x-hasura-admin-secret": "121291Jay!"
+          // SECRET IN NOTE.MD
+          "x-hasura-admin-secret": ""
         },
       },
     })
