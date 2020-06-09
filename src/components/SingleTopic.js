@@ -8,11 +8,16 @@ import { Likes } from "./Likes";
 
 const TOPICS_SUBSCRIPTION = gql`
   subscription topicsSubscription {
-    topics(order_by: { likes: desc }) {
-      user_id
-      id
-      likes
-      topic
+    users(where: {auth0_id: {_eq: "4444"}}) {
+      auth0_id
+      name
+      topics_(order_by: {likes: desc}) {
+        topic
+        name
+        parent_id
+        likes
+        id
+      }
     }
   }
 `;
@@ -30,10 +35,13 @@ export const SingleTopic = () => {
   return (
     <div className="card-container">
       <Card.Group>
-        {data.topics.map((topic, i) => (
+      
+        {data.users[0].topics_.map((topic, i) => (
+          
           <Card key={topic.id}>
+            
             <Card.Content>
-              <Card.Header>{topic.user_id}</Card.Header>
+              <Card.Header>{topic.name}</Card.Header>
               <Card.Description>
                 <strong>{topic.topic}</strong>
               </Card.Description>

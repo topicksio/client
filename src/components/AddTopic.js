@@ -18,8 +18,8 @@ export const AddTopic = () => {
   const [folderTextValue, changeFolderTextValue] = useState("");
 
   const ADD_TOPIC = gql`
-    mutation AddTopic($from: String, $topic: String) {
-      insert_topics(objects: { from: $from, topic: $topic }) {
+    mutation AddTopic($name: String, $topic: String, $parentId: String) {
+      insert_topics(objects: {name: $name, topic: $topic, parent_id: $parentId}) {
         returning {
           id
         }
@@ -66,7 +66,7 @@ export const AddTopic = () => {
                 icon="plus"
                 onClick={() => {
                   addTopic({
-                    variables: { from: "lotso", topic: newTopic },
+                    variables: { name: "lotso", topic: newTopic, parentId: "4444" },
                   });
                   changeNewTopic("");
                   // changeModalOpen(false);

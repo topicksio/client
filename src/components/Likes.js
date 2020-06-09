@@ -11,7 +11,7 @@ const ADD_LIKES = gql`
         id
         topic
         likes
-        user_id
+        name
       }
     }
   }
@@ -25,6 +25,7 @@ export const Likes = ({ topic }) => {
 
   return (
     <>
+    {console.log(topic)}
       <Button as="div"  labelPosition="right" floated="right" ref={buttonRef}>
         <Button
           color="white"
