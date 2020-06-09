@@ -35,11 +35,11 @@ export const SingleTopic = () => {
   return (
     <div className="card-container">
       <Card.Group>
-      
+
         {data.users[0].topics_.map((topic, i) => (
-          
+
           <Card key={topic.id}>
-            
+
             <Card.Content>
               <Card.Header>{topic.name}</Card.Header>
               <Card.Description>

@@ -44,11 +44,11 @@ export const AddTopic = () => {
             color="blue"
             size="large"
             icon="plus"
-            // onClick={changeModalOpen(true)}
+          // onClick={changeModalOpen(true)}
           />
         }
-        // open={modalOpen}
-        // onClose={changeModalOpen(false)}
+      // open={modalOpen}
+      // onClose={changeModalOpen(false)}
       >
         <Modal.Header>Add a Topic</Modal.Header>
         <Modal.Content image>
