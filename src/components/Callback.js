@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useState } from "react";
+import { GlobalContext } from "../context/GlobalStore";
 import { Redirect } from 'react-router-dom'
 
+
+
 export const Callback = () => {
+  const { state, fetchValid } = useContext(
+    GlobalContext
+  );
 
+  console.log(state.isLoggedIn)
 
-
-  const accessToken = window.location.hash
-  console.log(accessToken)
-
-
-  return (
-    <>
-      <Redirect from='/callback' to='/dashboard' />
-      {accessToken}
-    </>
-  )
+  if (state.isLoggedIn === true) {
+    return <Redirect to='/dashboard' />
+  } else {
+    return <Redirect to='/' />
+  }
 }

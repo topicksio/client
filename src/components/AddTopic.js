@@ -1,21 +1,18 @@
 import React, { useState, useContext } from "react";
 import { GlobalContext } from "../context/GlobalStore";
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { Button, Modal, Input, Form } from "semantic-ui-react";
 
 export const AddTopic = () => {
   //CTX store
-  const { state, deleteTopic, addTopicState, addFolder } = useContext(
+  const { state } = useContext(
     GlobalContext
   );
-  const TopicFolders = Object.keys(state);
+  // const TopicFolders = Object.keys(state);
 
   // local state
-  const [activeFolder, changeActiveFolder] = useState(TopicFolders[0] || "");
-  const [textValue, changeTextValue] = useState("");
-  const [fromTextValue, changeFromTextValue] = useState("");
-  const [folderTextValue, changeFolderTextValue] = useState("");
+
 
   const ADD_TOPIC = gql`
     mutation AddTopic($name: String, $topic: String, $parentId: String) {
@@ -28,7 +25,6 @@ export const AddTopic = () => {
   `;
 
   const [newTopic, changeNewTopic] = useState("");
-  const [modalOpen, changeModalOpen] = useState(false);
   const [addTopic] = useMutation(ADD_TOPIC);
 
   const handleChange = (e) => {

@@ -1,18 +1,13 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer } from "react";
 import GlobalReducer from "./GlobalReducer";
 
 
 const authData = {
-  id:'145777948',
-  user: 'l0tso',
-  email: 'lotsoofficial@gmail.com',
-  isLoggedIn:true,
-  onAuthentication(){
-    this.isLoggedIn = true
-  },
-  getLoginStatus() {
-    return this.isLoggedIn
-  }
+  id:'',
+  user: '',
+  email: '',
+  exp: '',
+  isLoggedIn:false,
 };
 
 // Create context
@@ -20,6 +15,8 @@ export const GlobalContext = createContext(authData);
 
 // Provider component
 export const GlobalProvider = ({ children }) => {
+
+  
   const [state, dispatch] = useReducer(GlobalReducer, authData);
 
 
@@ -27,29 +24,23 @@ export const GlobalProvider = ({ children }) => {
 
   //ACTIONS
 
-  const deleteTopic = (topic_folder, id) => {
+  const fetchValid = (user, id, exp) => {
     dispatch({
-      type: "DELETE_TOPIC",
-      payload: { topic_folder, id },
+      type: "FETCH_VALID",
+      payload: { exp, user, id },
     });
   };
 
-  const addTopic = (topic_folder, topic, id) => {
+  const changeLoginState = (auth) => {
     dispatch({
-      type: "ADD_TOPIC",
-      payload: { topic_folder, topic, id },
-    });
-  };
+      type: "IS_LOGGED_IN",
+      payload: {auth}
+    })
+  }
 
-  const addFolder = (topic_folder) => {
-    dispatch({
-      type: "ADD_FOLDER",
-      payload: { topic_folder },
-    });
-  };
 
   return (
-    <GlobalContext.Provider value={{ state, deleteTopic, addTopic, addFolder }}>
+    <GlobalContext.Provider value={{ state, fetchValid }}>
       {children}
     </GlobalContext.Provider>
   );

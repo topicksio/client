@@ -5,10 +5,12 @@ export const Landing = () => {
     <div className="sign-in">
       <a
         href="https://id.twitch.tv/oauth2/authorize?client_id=mpjn8uocr7w1yt5b34ihtllgzlxfu1&amp;redirect_uri=http://localhost:3000/callback&amp;response_type=token&amp;scope=user_read+channel:read:subscriptions+user:read:email&amp;force_verify=true"
-        onClick={console.log(window.location)}
+        
       >
         login with twitch
       </a>
     </div>
   );
 };
+
+

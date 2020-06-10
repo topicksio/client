@@ -8,7 +8,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import "./App.css";
 import { AppRouter } from "./routers/Router";
 
-const token = "";
+// const token = "";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -20,7 +20,7 @@ const client = new ApolloClient({
         headers: {
           // Authorization: `Bearer ${token}`,
           // SECRET IN NOTE.MD
-          "x-hasura-admin-secret": "121291Jay!"
+          "x-hasura-admin-secret": ""
         },
       },
     })

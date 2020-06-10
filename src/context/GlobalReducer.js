@@ -1,22 +1,21 @@
 export default (state, action) => {
-  const { topic_folder, id } = action.payload;
-  console.log(topic_folder);
+  const { user, id, exp } = action.payload;
+
   switch (action.type) {
-    case "DELETE_TOPIC":
+    case "FETCH_VALID":
+      console.log(user)
       return {
         ...state,
-        [topic_folder]: state[topic_folder].filter((topic) => topic.id !== id),
+        id,
+        user,
+        exp,
+        isLoggedIn: true
       };
-    case "ADD_TOPIC":
+    case "IS_LOGGED_IN":
       return {
         ...state,
-        [topic_folder]: [...state[topic_folder], action.payload],
       };
-    case "ADD_FOLDER":
-      return {
-        ...state,
-        [topic_folder]: [],
-      };
+
     default:
       throw new Error();
   }

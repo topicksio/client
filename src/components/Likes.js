@@ -1,8 +1,7 @@
-import React, { useState, useContext, useRef } from "react";
-import { GlobalContext } from "../context/GlobalStore";
+import React, { useState, useRef } from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Card, Icon, Label, Loader } from "semantic-ui-react";
+import { Button, Icon, Label } from "semantic-ui-react";
 
 const ADD_LIKES = gql`
   mutation AddLikes($id: Int, $likes: Int) {
@@ -20,13 +19,13 @@ const ADD_LIKES = gql`
 export const Likes = ({ topic }) => {
   const buttonRef = useRef();
   const [addLikes] = useMutation(ADD_LIKES);
-  const [likesNum, changeLikesNum] = useState(0);
+  
   const [active, changeActive] = useState(false);
 
   return (
     <>
-    {console.log(topic)}
-      <Button as="div"  labelPosition="right" floated="right" ref={buttonRef}>
+      
+      <Button as="div" labelPosition="right" floated="right" ref={buttonRef}>
         <Button
           color="white"
           toggle
@@ -42,7 +41,7 @@ export const Likes = ({ topic }) => {
           <Icon name="heart" />
           Like
         </Button>
-        <Label as="a" basic  color="white" pointing="left">
+        <Label as="a" basic color="white" pointing="left">
           {topic.likes}
         </Label>
       </Button>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BrowserRouter as Router, Route, Switch, NavLink, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch  } from "react-router-dom";
 import { Dashboard } from "../components/Dashboard";
 import { Landing } from "../components/Landing";
 import { Callback } from "../components/Callback";

@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalStore";
 import gql from "graphql-tag";
 import { useSubscription } from "@apollo/react-hooks";
-import { Button, Card, Icon, Label, Loader } from "semantic-ui-react";
+import {  Card, Loader } from "semantic-ui-react";
 import { AddTopic } from "./AddTopic";
 import { Likes } from "./Likes";
 
@@ -24,8 +24,8 @@ const TOPICS_SUBSCRIPTION = gql`
 
 export const SingleTopic = () => {
   //CTX store
-  const { state, deleteTopic, addTopic, addFolder } = useContext(GlobalContext);
-  const TopicFolders = Object.keys(state);
+  const { state } = useContext(GlobalContext);
+  
 
   const { loading, error, data } = useSubscription(TOPICS_SUBSCRIPTION);
 
