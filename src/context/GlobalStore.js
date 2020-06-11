@@ -3,11 +3,13 @@ import GlobalReducer from "./GlobalReducer";
 
 
 const authData = {
-  id:'',
+  id: '',
   user: '',
   email: '',
   exp: '',
-  isLoggedIn:false,
+  isLoggedIn: false,
+  email_verified: false,
+  picture: ''
 };
 
 // Create context
@@ -16,25 +18,25 @@ export const GlobalContext = createContext(authData);
 // Provider component
 export const GlobalProvider = ({ children }) => {
 
-  
+
   const [state, dispatch] = useReducer(GlobalReducer, authData);
 
-
+  
 
 
   //ACTIONS
 
-  const fetchValid = (user, id, exp) => {
+  const fetchValid = (user, id, exp, email, email_verified, picture) => {
     dispatch({
       type: "FETCH_VALID",
-      payload: { exp, user, id },
+      payload: { exp, user, id, email, email_verified, picture },
     });
   };
 
   const changeLoginState = (auth) => {
     dispatch({
       type: "IS_LOGGED_IN",
-      payload: {auth}
+      payload: { auth }
     })
   }
 

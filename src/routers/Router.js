@@ -19,7 +19,7 @@ export const AppRouter = () => {
         <Switch>
           <Route exact path="/" component={Landing} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/callback" component={Callback} />
+          <Route exact path="/callback" component={Callback} />
         </Switch>
       </Router>
     </>

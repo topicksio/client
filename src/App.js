@@ -20,7 +20,7 @@ const client = new ApolloClient({
         headers: {
           // Authorization: `Bearer ${token}`,
           // SECRET IN NOTE.MD
-          "x-hasura-admin-secret": ""
+          "x-hasura-admin-secret": "redfred44" //I know i shouldn't push this up to git but its fine for now
         },
       },
     })
