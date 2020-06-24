@@ -44,6 +44,7 @@ export const SingleTopic = () => {
               <Card.Header>{topic.name}</Card.Header>
               <Card.Description>
                 <strong>{topic.topic}</strong>
+                
               </Card.Description>
               <Likes topic={topic} />
             </Card.Content>
