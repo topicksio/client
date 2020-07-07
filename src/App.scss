@@ -149,6 +149,10 @@ html {
   overflow: hidden;
 }
 
+a {
+  color: black;
+}
+
 h1 {
   font-size: 2em;
 }
@@ -172,27 +176,47 @@ h4 {
 .landing {
   width: 100%;
   height: 100%;
-  background-color: #212121;
+  background-color: white;
 
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 81px;
+    height: 85px;
     // border: black 1px solid;
-    padding: 0 30px;
+    padding: 0 35px;
+
     img {
-      width: auto;
-      height: 50px;
+      width: 175px;
+      height: auto;
     }
     ul {
       display: flex;
       li {
-        color: white;
-        margin: 0 15px;
+        display: flex;
+        align-items: center;
+        font-size: 1.3em;
+        color: black;
+        margin: 0 10px;
+        height: 76px;
+        font-weight: 600;
+        .twitch {
+          display: flex;
+          align-items: center;
+          border: black solid 3px;
+          background: linear-gradient(70deg, #bb00ff25, #c8f6ff25);
+          height: 50%;
+          padding: 10px;
+          border-radius: 5px;
+        }
       }
     }
+  }
+  .main-landing {
+    background: linear-gradient(140deg, #c8f6ff65, #c8f6ff50 35%, #bb00ff50);
+    height: 100%;
+    border-radius: 50px;
   }
 }
 
