@@ -254,13 +254,13 @@ h4 {
   border-radius: 50px;
 }
 
-.landing .main-landing div {
+.landing .main-landing .mock-card {
   background: white;
   -webkit-box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
           box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-  border-radius: 30px;
-  width: 150px;
-  height: 150px;
+  border-radius: 8px;
+  width: 250px;
+  height: 75px;
 }
 
 .dashboard-container {
